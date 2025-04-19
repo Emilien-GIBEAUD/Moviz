@@ -11,6 +11,7 @@ class User extends Entity
     protected ?string $password = '';
     protected ?string $first_name = '';
     protected ?string $last_name = '';
+    protected ?string $pseudo = '';
 
     public function getId(): ?int
     {
@@ -72,6 +73,18 @@ class User extends Entity
         return $this;
     }
 
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(?string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
+
+        return $this;
+    }
+
     /*
         Pourrait être déplacé dans une classe UserValidator
     */
@@ -83,6 +96,9 @@ class User extends Entity
         }
         if (empty($this->getLastName())) {
             $errors['last_name'] = 'Le champ nom ne doit pas être vide';
+        }
+        if (empty($this->getPseudo())) {
+            $errors['pseudo'] = 'Le champ pseudo ne doit pas être vide';
         }
         if (empty($this->getEmail())) {
             $errors['email'] = 'Le champ email ne doit pas être vide';

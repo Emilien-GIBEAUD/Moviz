@@ -50,6 +50,7 @@ class AuthController extends Controller
                     'email' => $user->getEmail(),
                     'first_name' => $user->getFirstName(),
                     'last_name' => $user->getLastName(),
+                    'pseudo' => $user->getPseudo(),
                 ];
                 header('location: index.php');
             } else {

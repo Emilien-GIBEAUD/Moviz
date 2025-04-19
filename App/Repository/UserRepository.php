@@ -38,21 +38,19 @@ class UserRepository extends Repository
     {
         
         if ($user->getId() !== null) {
-                $query = $this->pdo->prepare('UPDATE user SET first_name = :first_name, last_name = :last_name,  
-                                                    email = :email, password = :password  WHERE id = :id'
+                $query = $this->pdo->prepare('UPDATE user SET first_name = :first_name, last_name = :last_name, pseudo = :pseudo, email = :email, password = :password  WHERE id = :id'
                 );
                 $query->bindValue(':id', $user->getId(), $this->pdo::PARAM_INT);
-           
 
         } else {
-            $query = $this->pdo->prepare('INSERT INTO user (first_name, last_name, email, password) 
-                                                    VALUES (:first_name, :last_name, :email, :password)'
+            $query = $this->pdo->prepare('INSERT INTO user (first_name, last_name, pseudo, email, password) VALUES (:first_name, :last_name, :pseudo, :email, :password)'
             );
 
         }
 
         $query->bindValue(':first_name', $user->getFirstName(), $this->pdo::PARAM_STR);
         $query->bindValue(':last_name', $user->getLastName(), $this->pdo::PARAM_STR);
+        $query->bindValue(':pseudo', $user->getPseudo(), $this->pdo::PARAM_STR);
         $query->bindValue(':email', $user->getEmail(), $this->pdo::PARAM_STR);
         $query->bindValue(':password', password_hash($user->getPassword(), PASSWORD_DEFAULT), $this->pdo::PARAM_STR);
 

@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Book;
+use App\Entity\User;
 use App\Db\Mysql;
 use App\Tools\StringTools;
 
