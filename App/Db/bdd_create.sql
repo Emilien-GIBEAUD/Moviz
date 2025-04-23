@@ -5,8 +5,8 @@ CREATE TABLE Movies (
     movie_id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     synopsis TEXT NOT NULL,
-    release_date YEAR NOT NULL,
-    duration INT NOT NULL,
+    release_date YEAR,
+    duration TIME,
     image_name VARCHAR(255),
     PRIMARY KEY (movie_id)
 );
@@ -14,22 +14,22 @@ DROP TABLE Movies;
 INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
 (NULL, "", "", "", "");
 INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
-(NULL, "Inception", "Un voleur expérimenté dans l'art d'extraire des secrets du subconscient pendant l'état de rêve se voit offrir une chance de retrouver sa vie normale en accomplissant une tâche impossible : l'implantation d'une idée dans l'esprit d'une personne. Au lieu de voler une idée, il doit en placer une.", "2010", "148", "inception.jpg"),
-(NULL, "The Dark Knight, Le Chevalier Noir", "Batman, avec l'aide du Lieutenant Jim Gordon et du procureur Harvey Dent, entreprend de démanteler les organisations criminelles qui sévissent dans Gotham. Leur association s'avère efficace, mais ils se retrouvent bientôt face à un nouveau génie du crime, le Joker, qui plonge Gotham dans l'anarchie.", "2008", "152", "dark_knight.jpg"),
-(NULL, "Interstellar", "Dans un futur proche où la Terre devient inhabitable, un groupe d'explorateurs entreprend la mission la plus importante de l'histoire de l'humanité : franchir les limites de notre galaxie pour déterminer si l'humanité a un avenir parmi les étoiles.", "2014", "169", "interstellar.jpg"),
-(NULL, "Un homme et une femme", "Un pilote de course automobile et une script-girl, tous deux veufs, se rencontrent à l'école de leurs enfants. Ils vont progressivement tomber amoureux l'un de l'autre, malgré le souvenir encore présent de leurs conjoints décédés.", "1966", "102", "homme_femme.jpg"),
-(NULL, "Itinéraire d'un enfant gâté", "Sam Lion, un ancien artiste de cirque devenu un homme d'affaires prospère, simule sa mort et part à l'aventure en Afrique. Il y rencontre Albert Duvivier, un jeune homme qu'il avait employé autrefois, et décide de l'aider à retrouver un sens à sa vie.", "1988", "125", "itinéraire_enfant.jpg"),
-(NULL, "Les Misérables", "Une adaptation moderne du roman de Victor Hugo, transposée pendant la Seconde Guerre mondiale. Henri Fortin, un déménageur illettré, s'identifie au personnage de Jean Valjean et aide une famille juive à fuir la France occupée pour se rendre en Suisse.", "1995", "175", "misérables.jpg"),
-(NULL, "Jurassic Park", "Un milliardaire et son équipe de généticiens parviennent à créer un parc d'attractions peuplé de dinosaures vivants, créés à partir d'ADN préhistorique. Avant son ouverture officielle, le fondateur du parc invite un groupe d'experts pour certifier de sa sécurité, mais les choses tournent mal lorsque les dinosaures s'échappent.", "1993", "127", "Jurassic_Park.webp"),
-(NULL, "E.T. l'extra-terrestre", "Un extraterrestre pacifique, abandonné sur Terre, est découvert et amicalement accueilli par un jeune garçon nommé Elliott. Ensemble, ils trouvent un moyen de renvoyer E.T. sur sa planète d'origine, avant que des scientifiques et agents gouvernementaux ne le capturent pour l'étudier.", "1982", "115", "E_T.jpg"),
-(NULL, "La Liste de Schindler", "L'histoire vraie d'Oskar Schindler, un industriel allemand qui sauva la vie de plus de 1 100 Juifs durant l'Holocauste en les employant dans sa fabrique. Initialement motivé par le profit, Schindler finit par risquer sa fortune et sa vie pour protéger ses ouvriers.", "1993", "195", "Liste_Schindler.jpg"),
-(NULL, "Les Affranchis", "L'histoire vraie de Henry Hill, un gangster américain d'origine irlando-italienne qui a travaillé pour la famille criminelle Lucchese de 1955 à 1980, avant de devenir informateur pour le FBI. Le film retrace son ascension, sa vie luxueuse et sa chute dans le milieu mafieux.", "1990", "146", "Affranchis.jpg"),
-(NULL, "Taxi Driver", "Travis Bickle, un vétéran du Vietnam souffrant d'insomnie, devient chauffeur de taxi la nuit à New York. Témoin de la corruption et de la déchéance urbaine, il se transforme progressivement en justicier urbain, déterminé à sauver une jeune prostituée et à nettoyer les rues de la ville.", "1976", "114", "Taxi Driver.webp"),
-(NULL, "Les Infiltrés", "À Boston, une guerre s'engage entre la police et la pègre irlandaise. Un policier infiltre le gang dirigé par un chef mafieux, tandis que ce dernier place également une taupe dans les rangs policiers. Lorsque chacun des deux camps réalise la présence d'un traître, une course contre la montre s'engage.", "2006", "151", "Infiltrés.jpg"),
-(NULL, "Inglourious Basterds", "Dans la France occupée pendant la Seconde Guerre mondiale, un groupe de soldats juifs américains, connus sous le nom des \"Basterds\", est chargé de répandre la terreur parmi les troupes allemandes en scalpant les soldats nazis. Leur chemin croise celui d'une jeune femme juive qui cherche à venger sa famille assassinée par un colonel SS.", "2009", "153", "Inglourious_Basterds.jpg"),
-(NULL, "Django Unchained", "Dans le sud des États-Unis, deux ans avant la guerre de Sécession, un ancien esclave s'associe à un chasseur de primes allemand qui l'a libéré. Ensemble, ils partent à la recherche de la femme de Django, toujours en esclavage, et affrontent le cruel propriétaire d'une plantation.", "2012", "165", "Django_Unchained.jpg"),
-(NULL, "Kill Bill: Volume 1", "Une ancienne tueuse à gages, connue sous le nom de \"La Mariée\", se réveille après quatre ans de coma et entreprend une vengeance sanglante contre son ancien patron, Bill, et son escadron d'assassins qui l'ont trahie lors de son mariage.", "2003", "111", "Kill_Bill_1.webp"),
-(NULL, "Kill Bill: Volume 2", "Suite de sa vengeance, \"La Mariée\" continue d'éliminer les membres restants de l'escadron d'assassins avant de confronter Bill, son ancien mentor et amant qui a tenté de la tuer le jour de son mariage.", "2004", "137", "Kill_Bill_2.jpg");
+(NULL, "Inception", "Un voleur expérimenté dans l'art d'extraire des secrets du subconscient pendant l'état de rêve se voit offrir une chance de retrouver sa vie normale en accomplissant une tâche impossible : l'implantation d'une idée dans l'esprit d'une personne. Au lieu de voler une idée, il doit en placer une.", "2010", "02:28:00", "inception.jpg"),
+(NULL, "The Dark Knight, Le Chevalier Noir", "Batman, avec l'aide du Lieutenant Jim Gordon et du procureur Harvey Dent, entreprend de démanteler les organisations criminelles qui sévissent dans Gotham. Leur association s'avère efficace, mais ils se retrouvent bientôt face à un nouveau génie du crime, le Joker, qui plonge Gotham dans l'anarchie.", "2008", "02:32:00", "dark_knight.jpg"),
+(NULL, "Interstellar", "Dans un futur proche où la Terre devient inhabitable, un groupe d'explorateurs entreprend la mission la plus importante de l'histoire de l'humanité : franchir les limites de notre galaxie pour déterminer si l'humanité a un avenir parmi les étoiles.", "2014", "02:49:00", "interstellar.jpg"),
+(NULL, "Un homme et une femme", "Un pilote de course automobile et une script-girl, tous deux veufs, se rencontrent à l'école de leurs enfants. Ils vont progressivement tomber amoureux l'un de l'autre, malgré le souvenir encore présent de leurs conjoints décédés.", "1966", "01:42:00", "homme_femme.jpg"),
+(NULL, "Itinéraire d'un enfant gâté", "Sam Lion, un ancien artiste de cirque devenu un homme d'affaires prospère, simule sa mort et part à l'aventure en Afrique. Il y rencontre Albert Duvivier, un jeune homme qu'il avait employé autrefois, et décide de l'aider à retrouver un sens à sa vie.", "1988", "02:05:00", "itinéraire_enfant.jpg"),
+(NULL, "Les Misérables", "Une adaptation moderne du roman de Victor Hugo, transposée pendant la Seconde Guerre mondiale. Henri Fortin, un déménageur illettré, s'identifie au personnage de Jean Valjean et aide une famille juive à fuir la France occupée pour se rendre en Suisse.", "1995", "02:55:00", "misérables.jpg"),
+(NULL, "Jurassic Park", "Un milliardaire et son équipe de généticiens parviennent à créer un parc d'attractions peuplé de dinosaures vivants, créés à partir d'ADN préhistorique. Avant son ouverture officielle, le fondateur du parc invite un groupe d'experts pour certifier de sa sécurité, mais les choses tournent mal lorsque les dinosaures s'échappent.", "1993", "02:07:00", "Jurassic_Park.webp"),
+(NULL, "E.T. l'extra-terrestre", "Un extraterrestre pacifique, abandonné sur Terre, est découvert et amicalement accueilli par un jeune garçon nommé Elliott. Ensemble, ils trouvent un moyen de renvoyer E.T. sur sa planète d'origine, avant que des scientifiques et agents gouvernementaux ne le capturent pour l'étudier.", "1982", "01:55:00", "E_T.jpg"),
+(NULL, "La Liste de Schindler", "L'histoire vraie d'Oskar Schindler, un industriel allemand qui sauva la vie de plus de 1 100 Juifs durant l'Holocauste en les employant dans sa fabrique. Initialement motivé par le profit, Schindler finit par risquer sa fortune et sa vie pour protéger ses ouvriers.", "1993", "03:15:00", "Liste_Schindler.jpg"),
+(NULL, "Les Affranchis", "L'histoire vraie de Henry Hill, un gangster américain d'origine irlando-italienne qui a travaillé pour la famille criminelle Lucchese de 1955 à 1980, avant de devenir informateur pour le FBI. Le film retrace son ascension, sa vie luxueuse et sa chute dans le milieu mafieux.", "1990", "02:26:00", "Affranchis.jpg"),
+(NULL, "Taxi Driver", "Travis Bickle, un vétéran du Vietnam souffrant d'insomnie, devient chauffeur de taxi la nuit à New York. Témoin de la corruption et de la déchéance urbaine, il se transforme progressivement en justicier urbain, déterminé à sauver une jeune prostituée et à nettoyer les rues de la ville.", "1976", "01:54:00", "Taxi Driver.webp"),
+(NULL, "Les Infiltrés", "À Boston, une guerre s'engage entre la police et la pègre irlandaise. Un policier infiltre le gang dirigé par un chef mafieux, tandis que ce dernier place également une taupe dans les rangs policiers. Lorsque chacun des deux camps réalise la présence d'un traître, une course contre la montre s'engage.", "2006", "02:31:00", "Infiltrés.jpg"),
+(NULL, "Inglourious Basterds", "Dans la France occupée pendant la Seconde Guerre mondiale, un groupe de soldats juifs américains, connus sous le nom des \"Basterds\", est chargé de répandre la terreur parmi les troupes allemandes en scalpant les soldats nazis. Leur chemin croise celui d'une jeune femme juive qui cherche à venger sa famille assassinée par un colonel SS.", "2009", "02:33:00", "Inglourious_Basterds.jpg"),
+(NULL, "Django Unchained", "Dans le sud des États-Unis, deux ans avant la guerre de Sécession, un ancien esclave s'associe à un chasseur de primes allemand qui l'a libéré. Ensemble, ils partent à la recherche de la femme de Django, toujours en esclavage, et affrontent le cruel propriétaire d'une plantation.", "2012", "02:45:00", "Django_Unchained.jpg"),
+(NULL, "Kill Bill: Volume 1", "Une ancienne tueuse à gages, connue sous le nom de \"La Mariée\", se réveille après quatre ans de coma et entreprend une vengeance sanglante contre son ancien patron, Bill, et son escadron d'assassins qui l'ont trahie lors de son mariage.", "2003", "01:51:00", "Kill_Bill_1.webp"),
+(NULL, "Kill Bill: Volume 2", "Suite de sa vengeance, \"La Mariée\" continue d'éliminer les membres restants de l'escadron d'assassins avant de confronter Bill, son ancien mentor et amant qui a tenté de la tuer le jour de son mariage.", "2004", "02:17:00", "Kill_Bill_2.jpg");
 
 CREATE TABLE Categories (
     category_id INT AUTO_INCREMENT,
@@ -102,6 +102,7 @@ CREATE TABLE movie_director (
     FOREIGN KEY (movie_id) REFERENCES Movies (movie_id),
     FOREIGN KEY (director_id) REFERENCES Directors (director_id)
 );
+DROP TABLE movie_director;
 INSERT INTO movie_director (movie_id, director_id) VALUES 
 (1,1),(2,1),(3,1),
 (4,2),(5,2),(6,2),
@@ -116,6 +117,7 @@ CREATE TABLE movie_category (
     FOREIGN KEY (movie_id) REFERENCES Movies (movie_id),
     FOREIGN KEY (category_id) REFERENCES Categories (category_id)
 );
+DROP TABLE movie_category;
 INSERT INTO movie_category (movie_id, category_id) VALUES 
 (,);
 INSERT INTO movie_category (movie_id, category_id) VALUES 

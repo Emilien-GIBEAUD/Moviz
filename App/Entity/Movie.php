@@ -8,11 +8,9 @@ class Movie extends Entity{
     protected ?int $movie_id = null;
     protected ?string $title = "";
     protected ?string $synopsis = "";
-    protected ?string $release_date;
-    protected ?int $duration;
+    protected ?string $release_date = "";
+    protected ?\DateTime $duration = null;
     protected ?string $image_name = "";
-
-
 
     /**
      * Get the value of movie_id
@@ -70,7 +68,7 @@ class Movie extends Entity{
     /**
      * Get the value of release_date
      */
-    public function getReleaseDate(): string
+    public function getReleaseDate(): string|null
     {
         return $this->release_date;
     }
@@ -78,7 +76,7 @@ class Movie extends Entity{
     /**
      * Set the value of release_date
      */
-    public function setReleaseDate(string $release_date): self
+    public function setReleaseDate(string|null $release_date): self
     {
         $this->release_date = $release_date;
 
@@ -88,7 +86,7 @@ class Movie extends Entity{
     /**
      * Get the value of duration
      */
-    public function getDuration(): ?int
+    public function getDuration(): DateTime|null
     {
         return $this->duration;
     }
@@ -96,7 +94,7 @@ class Movie extends Entity{
     /**
      * Set the value of duration
      */
-    public function setDuration(?int $duration): self
+    public function setDuration(DateTime|null $duration): self
     {
         $this->duration = $duration;
 
@@ -121,4 +119,10 @@ class Movie extends Entity{
         return $this;
     }
 
+    public function getImagePath(){
+        if (!$this->getImageName()) {
+            return _ASSETS_IMG_DIR_."default-movie.png";
+        }
+        return _MOVIES_IMG_DIR_.$this->getImageName();
+    }
 }

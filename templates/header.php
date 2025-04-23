@@ -24,6 +24,11 @@ use App\Tools\NavigationTools;
 
     <div class="container">
         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+                <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+                    <img width="120" src="./assets/images/logo-moviz.png" alt="Logo de Okaz">
+                </a>
+            </div>
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a href="/" class="nav-link px-2 <?= NavigationTools::addActiveClass('page', 'home') ?>">Accueil</a>
