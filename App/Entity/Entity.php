@@ -22,12 +22,12 @@ class Entity
             // On parcourt le tableau de données
             foreach ($data as $key => $value) {
                 // Pour chaque donnée, on appel le setter
-                $methodName = 'set' . StringTools::toPascalCase($key);
+                $methodName = 'set' . StringTools::toPascalCase($key);      // first_name => setFirstName
                 if (method_exists($this, $methodName)) {
                     if ($key == 'created_at') {
                         $value = new \DateTime($value);
                     }
-                    $this->{$methodName}($value);
+                    $this->{$methodName}($value);                           // appel dynamique : $this->setFirstName($value);
                 }
             }
         }

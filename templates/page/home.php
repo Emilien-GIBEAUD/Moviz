@@ -1,6 +1,12 @@
-<?php require_once _ROOTPATH_ . '/templates/header.php'; ?>
+<?php 
+require_once _ROOTPATH_ . '/templates/header.php'; 
+use App\Entity\User;
+?>
 
-<h1>Bienvenue sur la page d'accueil du projet<?=$nom_projet ?></h1>
-<h2>Salut <?=$nom;?></h2>
+<h1>Bienvenue sur la page d'accueil du projet
+    <?php if (User::isLogged()) { ?>
+        <?=$pseudo?>
+    <?php }?>
+</h1>
 
 <?php require_once _ROOTPATH_ . '/templates/footer.php'; ?>

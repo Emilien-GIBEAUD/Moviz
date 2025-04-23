@@ -51,6 +51,7 @@ class AuthController extends Controller
                     'first_name' => $user->getFirstName(),
                     'last_name' => $user->getLastName(),
                     'pseudo' => $user->getPseudo(),
+                    'role' => $user->getRole(),
                 ];
                 header('location: index.php');
             } else {

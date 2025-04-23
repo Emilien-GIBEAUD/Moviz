@@ -2,7 +2,8 @@
 
 namespace App\Entity;
 
-
+use App\Db\Mysql;
+use App\Tools\BddTools;
 
 class User extends Entity
 {
@@ -12,6 +13,7 @@ class User extends Entity
     protected ?string $first_name = '';
     protected ?string $last_name = '';
     protected ?string $pseudo = '';
+    protected ?string $role = '';
 
     public function getId(): ?int
     {
@@ -85,28 +87,54 @@ class User extends Entity
         return $this;
     }
 
+    public function getRole(): ?string
+    {
+        return $this->role;
+    }
+
+    public function setRole(?string $role): self
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
     /*
         Pourrait être déplacé dans une classe UserValidator
     */
     public function validate(): array
     {
         $errors = [];
+        $mysql = Mysql::getInstance();
         if (empty($this->getFirstName())) {
-            $errors['first_name'] = 'Le champ prénom ne doit pas être vide';
+            $errors['first_name'] = 'Le champ prénom est obligatoire !';
         }
         if (empty($this->getLastName())) {
-            $errors['last_name'] = 'Le champ nom ne doit pas être vide';
+            $errors['last_name'] = 'Le champ nom est obligatoire !';
         }
         if (empty($this->getPseudo())) {
-            $errors['pseudo'] = 'Le champ pseudo ne doit pas être vide';
+            $errors['pseudo'] = 'Le champ pseudo est obligatoire !';
+        } else if (BddTools::valueExists($mysql, "users", "pseudo", $this->getPseudo())) {
+            $errors['pseudo'] = 'Ce pseudo est déjà utilisé !';
         }
+
         if (empty($this->getEmail())) {
-            $errors['email'] = 'Le champ email ne doit pas être vide';
+            $errors['email'] = 'Le champ email est obligatoire !';
         } else if (!filter_var($this->getEmail(), FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'L\'email n\'est pas valide';
+        } else if (BddTools::valueExists($mysql, "users", "email", $this->getEmail())) {
+            $errors['email'] = 'Cet email est déjà utilisé !';
         }
+
         if (empty($this->getPassword())) {
-            $errors['password'] = 'Le champ mot de passe ne doit pas être vide';
+            $errors['password'] = 'Le champ mot de passe est obligatoire !';
+        } else {
+            // Vérification que le mot de passe est assez fort
+            // NB_CHAR_PWD dont 1 majuscule, 1 minuscule, 1 chiffre et 1 catactère spécial
+            $regex = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{'. preg_quote(NB_CHAR_PWD) .',}$/';
+            if (!preg_match($regex, $this->getPassword())) {
+                $errors["password"] = "Le mot de passe doit contenir au moins ". NB_CHAR_PWD ." caractères dont au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 catactère spécial !";
+            }
         }
         return $errors;
     }
@@ -137,7 +165,12 @@ class User extends Entity
     */
     public static function isUser(): bool
     {
-        return isset($_SESSION['user']);
+        return isset($_SESSION['user']) && $_SESSION['user']["role"] === "user";
+    }
+
+    public static function isAdmin(): bool
+    {
+        return isset($_SESSION['user']) && $_SESSION['user']["role"] === "admin";
     }
 
     /*

@@ -35,10 +35,12 @@ class PageController extends Controller
     protected function home()
     {
 
-        $this->render('page/home', [
-            'nom_projet' => "Moviz",
-            'nom' => "Emilien",
-        ]);
+        if(isset($_SESSION["user"])){
+            $this->render('page/home', $_SESSION["user"]);
+        } else {
+            $this->render('page/home');
+        }
+        
 
     }
 
