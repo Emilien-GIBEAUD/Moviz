@@ -24,7 +24,7 @@ use App\Tools\NavigationTools;
 <body>
 
     <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-1 mb-4 border-bottom">
             <div class="col-md-3 mb-2 mb-md-0">
                 <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
                     <img width="120" src="./assets/images/logo-moviz.png" alt="Logo de Okaz">
@@ -43,10 +43,10 @@ use App\Tools\NavigationTools;
                 <ul class="nav nav-pills">
                     <span class="text-end ms-4 me-1 my-auto text-decoration-underline"><b>Admin :</b></span>
                     <li class="nav-item">
-                        <a href="/" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Ajouter<br>film</a>
+                        <a href="/" class="nav-link px-2 py-1 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Ajouter<br>film</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/?controller=movie&action=list" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
+                        <a href="/?controller=movie&action=list" class="nav-link px-2 py-1 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
                     </li>
                 </ul>
             <?php } ?>
@@ -54,10 +54,10 @@ use App\Tools\NavigationTools;
             <div class="col-md-3 text-end">
                 <?php if (User::isLogged()) { ?>
                     <span><b><?= $pseudo ?></b> est connecté</span>
-                    <a href="/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
+                    <a href="/index.php?controller=auth&action=logout" class="btn btn-primary py-1">Déconnexion</a>
                 <?php } else { ?>
-                    <a href="/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
-                    <a href="/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('user', 'register') ?>">Inscription</a>
+                    <a href="/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 py-1 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
+                    <a href="/index.php?controller=user&action=register" class="btn btn-outline-primary me-2 py-1 <?= NavigationTools::addActiveClass('user', 'register') ?>">Inscription</a>
                 <?php } ?>
             </div>
         </header>
