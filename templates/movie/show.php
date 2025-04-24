@@ -1,10 +1,6 @@
 <?php
 require_once _ROOTPATH_ . '/templates/header.php';
 
-// use App\Entity\Movie;
-// var_dump($movie);
-// var_dump($directors);
-// var_dump($categories);
 
 ?>
 
@@ -33,7 +29,7 @@ require_once _ROOTPATH_ . '/templates/header.php';
             ?>
         </div>
         <div class="col-6 col-xl-3">
-            <b>Réalisateur(s) : </b>
+            <b>Réalisateur : </b>
             <?php 
                 $i = 0;
                 foreach($directors as $director){

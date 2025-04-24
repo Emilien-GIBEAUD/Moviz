@@ -51,11 +51,20 @@ class MovieController extends Controller{
                     $directorrepository = new DirectorRepository();
                     $directors = $directorrepository->findAllByMovieId($movie->getMovieId());
 
-                    $this->render('movie/show', [
-                    'movie' => $movie,
-                    'categories' => $categories,
-                    'directors' => $directors,
-                ]);
+                    if(isset($_SESSION["user"])){
+                        $this->render('movie/show', array_merge([
+                            'movie' => $movie,
+                            'categories' => $categories,
+                            'directors' => $directors,
+                        ],$_SESSION["user"]));
+                    } else {
+                        $this->render('movie/show', [
+                            'movie' => $movie,
+                            'categories' => $categories,
+                            'directors' => $directors,
+                        ]);
+                    }
+        
                 } else {
                     throw new \Exception("L'id en paramètre URL est inconnu.", 1);
                 }
@@ -76,9 +85,16 @@ class MovieController extends Controller{
             $movieRepository = new MovieRepository;
             $movies = $movieRepository->findAllMovie();
 
-            $this->render('movie/list', [
-            'movies' => $movies,
-            ]);
+            if(isset($_SESSION["user"])){
+                $this->render('movie/list', array_merge([
+                    'movies' => $movies,
+                ],$_SESSION["user"]));
+            } else {
+                $this->render('movie/list', [
+                    'movies' => $movies,
+                    ]);
+            }
+    
         } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()

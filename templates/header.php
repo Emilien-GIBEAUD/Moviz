@@ -2,6 +2,7 @@
 
 use App\Entity\User;
 use App\Tools\NavigationTools;
+
 ?>
 
 <!DOCTYPE html>
@@ -33,16 +34,26 @@ use App\Tools\NavigationTools;
                 <li class="nav-item">
                     <a href="/" class="nav-link px-2 <?= NavigationTools::addActiveClass('page', 'home') ?>">Accueil</a>
                 </li>
-            </ul>
-            <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a href="/?controller=movie&action=list" class="nav-link px-2 <?= NavigationTools::addActiveClass('movie', 'list') ?>">Films</a>
                 </li>
             </ul>
 
+            <?php if (User::isAdmin()) { ?>
+                <ul class="nav nav-pills">
+                    <span class="text-end ms-4 me-1 my-auto text-decoration-underline"><b>Admin :</b></span>
+                    <li class="nav-item">
+                        <a href="/" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Ajouter<br>film</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/?controller=movie&action=list" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
+                    </li>
+                </ul>
+            <?php } ?>
+
             <div class="col-md-3 text-end">
                 <?php if (User::isLogged()) { ?>
-                    <span><b><?=$pseudo?></b> est connecté</span>
+                    <span><b><?= $pseudo ?></b> est connecté</span>
                     <a href="/index.php?controller=auth&action=logout" class="btn btn-primary">Déconnexion</a>
                 <?php } else { ?>
                     <a href="/index.php?controller=auth&action=login" class="btn btn-outline-primary me-2 <?= NavigationTools::addActiveClass('auth', 'login') ?>">Connexion</a>
