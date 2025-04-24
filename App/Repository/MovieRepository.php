@@ -19,4 +19,19 @@ class MovieRepository extends Repository{
             return false;
         }
     }
+
+    public function findAllMovie():array
+    {
+        $query = $this->pdo->prepare("SELECT * FROM movies");
+        $query->execute();
+        $movies = $query->fetchALL($this->pdo::FETCH_ASSOC);
+
+        $moviesArray = [];
+        if ($movies) {
+            foreach($movies as $movie){
+                $moviesArray[] = Movie::createAndHydrate($movie);
+            }
+        }
+        return $moviesArray;
+    }
 }

@@ -1,7 +1,10 @@
 <?php
 require_once _ROOTPATH_ . '/templates/header.php';
 
-use App\Entity\Movie;
+// use App\Entity\Movie;
+// var_dump($movie);
+// var_dump($directors);
+// var_dump($categories);
 
 ?>
 
@@ -10,7 +13,7 @@ use App\Entity\Movie;
     </h1>
     <div class="row">
         <div class="col-6 col-xl-3">
-            Date de sortie : 
+            <b>Date de sortie : </b>
             <?php 
                 if ($movie->getReleaseDate()) {
                     echo $movie->getReleaseDate();
@@ -20,7 +23,7 @@ use App\Entity\Movie;
             ?>
         </div>
         <div class="col-6 col-xl-3">
-            Durée : 
+            <b>Durée : </b>
             <?php 
                 if ($movie->getDuration()) {
                     echo $movie->getDuration()->format('G\hi');
@@ -30,10 +33,32 @@ use App\Entity\Movie;
             ?>
         </div>
         <div class="col-6 col-xl-3">
-            Réalisateur(s) :
+            <b>Réalisateur(s) : </b>
+            <?php 
+                $i = 0;
+                foreach($directors as $director){
+                    $i++;
+                    echo $director->getFirstName()." ".$director->getLastName();
+                    if ($i < count($directors)) {
+                        echo ", ";
+                    } else {
+                        echo ".";
+                    }
+            } ?>
         </div>
         <div class="col-6 col-xl-3">
-            Genre :
+            <b>Genre : </b>
+            <?php 
+                $i = 0;
+                foreach($categories as $category){
+                    $i++;
+                    echo $category->getName();
+                    if ($i < count($categories)) {
+                        echo ", ";
+                    } else {
+                        echo ".";
+                    }
+            } ?>
         </div>
     </div>
     <div class="col-10 col-sm-8 col-lg-6 mx-auto">

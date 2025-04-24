@@ -30,6 +30,9 @@ INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_nam
 (NULL, "Django Unchained", "Dans le sud des États-Unis, deux ans avant la guerre de Sécession, un ancien esclave s'associe à un chasseur de primes allemand qui l'a libéré. Ensemble, ils partent à la recherche de la femme de Django, toujours en esclavage, et affrontent le cruel propriétaire d'une plantation.", "2012", "02:45:00", "Django_Unchained.jpg"),
 (NULL, "Kill Bill: Volume 1", "Une ancienne tueuse à gages, connue sous le nom de \"La Mariée\", se réveille après quatre ans de coma et entreprend une vengeance sanglante contre son ancien patron, Bill, et son escadron d'assassins qui l'ont trahie lors de son mariage.", "2003", "01:51:00", "Kill_Bill_1.webp"),
 (NULL, "Kill Bill: Volume 2", "Suite de sa vengeance, \"La Mariée\" continue d'éliminer les membres restants de l'escadron d'assassins avant de confronter Bill, son ancien mentor et amant qui a tenté de la tuer le jour de son mariage.", "2004", "02:17:00", "Kill_Bill_2.jpg");
+INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
+(NULL, "Rosetta", "Une jeune femme déterminée lutte pour trouver un emploi stable et s'extraire de la précarité, malgré les nombreux obstacles qui se dressent sur son chemin. Vivant dans une caravane avec sa mère alcoolique, Rosetta cherche désespérément à s'intégrer dans la société et à mener ce qu'elle considère comme une vie normale.", "1999", "01:35:00", "Rosetta.webp");
+
 
 CREATE TABLE Categories (
     category_id INT AUTO_INCREMENT,
@@ -51,6 +54,8 @@ INSERT INTO Categories (category_id, name) VALUES
 (NULL, "Biographie"),
 (NULL, "Guerre"),
 (NULL, "Western");
+INSERT INTO Categories (category_id, name) VALUES 
+(NULL, "Social");
 
 CREATE TABLE Directors (
     director_id INT AUTO_INCREMENT,
@@ -64,6 +69,9 @@ INSERT INTO Directors (director_id, first_name, last_name) VALUES
 (NULL, 'Steven', 'Spielberg'),
 (NULL, 'Martin', 'Scorsese'),
 (NULL, 'Quentin', 'Tarantino');
+INSERT INTO Directors (director_id, first_name, last_name) VALUES 
+(NULL, "Jean-Pierre", "Dardenne"),
+(NULL, "Luc", "Dardenne");
 
 CREATE TABLE Users (
     user_id INT AUTO_INCREMENT,
@@ -109,6 +117,9 @@ INSERT INTO movie_director (movie_id, director_id) VALUES
 (7,3),(8,3),(9,3),
 (10,4),(11,4),(12,4),
 (13,5),(14,5),(15,5),(16,5);
+INSERT INTO movie_director (movie_id, director_id) VALUES 
+(17,6),
+(17,7);
 
 CREATE TABLE movie_category (
     movie_id INT,
@@ -137,3 +148,6 @@ INSERT INTO movie_category (movie_id, category_id) VALUES
 (14, 12), (14, 4), (14, 2),
 (15, 2), (15, 5), (15, 3),
 (16, 2), (16, 5), (16, 3), (16, 4);
+INSERT INTO movie_category (movie_id, category_id) VALUES 
+(17,4),
+(17,13);

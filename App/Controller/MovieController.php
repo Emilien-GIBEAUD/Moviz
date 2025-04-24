@@ -4,7 +4,8 @@ namespace App\Controller;
 
 use App\Repository\MovieRepository;
 use App\Entity\Movie;
-
+use App\Repository\CategoryRepository;
+use App\Repository\DirectorRepository;
 
 class MovieController extends Controller{
     public function route(): void
@@ -15,7 +16,10 @@ class MovieController extends Controller{
                     case 'show':
                         $this->show();
                         break;
-                    case 'delete':
+                    case 'list':
+                        $this->list();
+                        break;
+                        case 'delete':
                         // Appeler méthode delete()
                         break;
                     default:
@@ -41,8 +45,16 @@ class MovieController extends Controller{
                 $movie = $movieRepository->findOneById($id);
 
                 if ($movie) {
+                    $categoryRepository = new CategoryRepository();
+                    $categories = $categoryRepository->findAllByMovieId($movie->getMovieId());
+
+                    $directorrepository = new DirectorRepository();
+                    $directors = $directorrepository->findAllByMovieId($movie->getMovieId());
+
                     $this->render('movie/show', [
                     'movie' => $movie,
+                    'categories' => $categories,
+                    'directors' => $directors,
                 ]);
                 } else {
                     throw new \Exception("L'id en paramètre URL est inconnu.", 1);
@@ -52,6 +64,21 @@ class MovieController extends Controller{
             }
 
 
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    protected function list(){
+        try {
+            $movieRepository = new MovieRepository;
+            $movies = $movieRepository->findAllMovie();
+
+            $this->render('movie/list', [
+            'movies' => $movies,
+            ]);
         } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()

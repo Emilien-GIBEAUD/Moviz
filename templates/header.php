@@ -5,7 +5,7 @@ use App\Tools\NavigationTools;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
@@ -32,6 +32,11 @@ use App\Tools\NavigationTools;
             <ul class="nav nav-pills">
                 <li class="nav-item">
                     <a href="/" class="nav-link px-2 <?= NavigationTools::addActiveClass('page', 'home') ?>">Accueil</a>
+                </li>
+            </ul>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="/?controller=movie&action=list" class="nav-link px-2 <?= NavigationTools::addActiveClass('movie', 'list') ?>">Films</a>
                 </li>
             </ul>
 
