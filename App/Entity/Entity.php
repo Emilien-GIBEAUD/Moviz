@@ -24,9 +24,7 @@ class Entity
                 // Pour chaque donnée, on appel le setter
                 $methodName = 'set' . StringTools::toPascalCase($key);      // first_name => setFirstName
                 if (method_exists($this, $methodName)) {
-                    if ($key == 'date_review') {
-                        $value = $value ? new \DateTime($value) : null;
-                    } else if ($key == 'duration') {
+                    if ($key == 'duration') {
                         $value = $value ? new \DateTime($value) : null;
                     }
                     $this->{$methodName}($value);                           // appel dynamique : $this->setFirstName($value);

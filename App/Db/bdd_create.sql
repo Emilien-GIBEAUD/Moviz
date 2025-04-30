@@ -59,8 +59,8 @@ INSERT INTO Categories (category_id, name) VALUES
 
 CREATE TABLE Directors (
     director_id INT AUTO_INCREMENT,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (director_id)
 );
 INSERT INTO Directors (director_id, first_name, last_name) VALUES 
@@ -151,3 +151,10 @@ INSERT INTO movie_category (movie_id, category_id) VALUES
 INSERT INTO movie_category (movie_id, category_id) VALUES 
 (17,4),
 (17,13);
+
+DELETE FROM movie_category
+WHERE movie_id > 18;
+DELETE FROM movie_director
+WHERE movie_id > 18;
+DELETE FROM movies
+WHERE movie_id > 18;

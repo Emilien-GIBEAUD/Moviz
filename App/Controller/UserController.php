@@ -55,7 +55,7 @@ class UserController extends Controller
             $this->render('user/add_edit', [
                 'user' => '',
                 'pageTitle' => 'Inscription',
-                'errors' => $errors
+                'errors' => $errors,
             ]);
 
         } catch (\Exception $e) {

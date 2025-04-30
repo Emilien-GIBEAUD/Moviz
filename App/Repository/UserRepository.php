@@ -9,7 +9,7 @@ use App\Tools\StringTools;
 class UserRepository extends Repository
 {
 
-    public function findOneById(int $id)
+    public function findOneById(int $id): bool|User
     {
         $query = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
         $query->bindParam(':id', $id, $this->pdo::PARAM_STR);
@@ -21,7 +21,7 @@ class UserRepository extends Repository
             return false;
         }
     }
-    public function findOneByEmail(string $email)
+    public function findOneByEmail(string $email): bool|User
     {
         $query = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $query->bindParam(':email', $email, $this->pdo::PARAM_STR);
@@ -34,19 +34,15 @@ class UserRepository extends Repository
         }
     }
 
-    public function persist(User $user)
+    public function persist(User $user): bool
     {
         
         if ($user->getId() !== null) {
-                $query = $this->pdo->prepare('UPDATE users SET first_name = :first_name, last_name = :last_name, pseudo = :pseudo, email = :email, password = :password WHERE id = :id'
-                );
-                $query->bindValue(':id', $user->getId(), $this->pdo::PARAM_INT);
-
+            $query = $this->pdo->prepare('UPDATE users SET first_name = :first_name, last_name = :last_name, pseudo = :pseudo, email = :email, password = :password WHERE id = :id');
+            $query->bindValue(':id', $user->getId(), $this->pdo::PARAM_INT);
         } else {
-            $query = $this->pdo->prepare('INSERT INTO users (first_name, last_name, pseudo, email, password, role) VALUES (:first_name, :last_name, :pseudo, :email, :password, :role)'
-            );
+            $query = $this->pdo->prepare('INSERT INTO users (first_name, last_name, pseudo, email, password, role) VALUES (:first_name, :last_name, :pseudo, :email, :password, :role)');
             $query->bindValue(':role', $user->getRole(), $this->pdo::PARAM_STR);
-
         }
 
         $query->bindValue(':first_name', $user->getFirstName(), $this->pdo::PARAM_STR);
@@ -57,4 +53,5 @@ class UserRepository extends Repository
 
         return $query->execute();
     }
+
 }

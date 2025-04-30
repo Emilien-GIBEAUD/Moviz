@@ -43,10 +43,10 @@ use App\Tools\NavigationTools;
                 <ul class="nav nav-pills">
                     <span class="text-end ms-4 me-1 my-auto text-decoration-underline"><b>Admin :</b></span>
                     <li class="nav-item">
-                        <a href="/" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Ajouter<br>film</a>
+                        <a href="/?controller=movie&action=add" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('movie', 'add') ?>">Ajouter<br>film</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/?controller=movie&action=list" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
+                        <a href="#" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
                     </li>
                 </ul>
             <?php } ?>
