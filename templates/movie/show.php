@@ -62,9 +62,9 @@ require_once _ROOTPATH_ . '/templates/header.php';
     </div>
     <div class="col-lg-6">
         <p class="lead"> <?= $movie->getSynopsis() ?></p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="/" type="button" class="btn btn-primary btn-lg px-2 py-1 me-md-2">Poster une critique</a>
-            <a href="/" type="button" class="btn btn-outline-secondary btn-lg px-2 py-1">Lire les critiques</a>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <a href="<?= "/?controller=movie&action=review&movie_id=" . $movie->getMovieId(); ?>" type="button" class="btn btn-primary btn-lg px-2 py-1 me-md-2">Poster une critique</a>
+            <a href="/" type="button" class="btn btn-outline-secondary btn-lg px-2 py-1">!!Lire les critiques!!</a>
         </div>
     </div>
 </div>

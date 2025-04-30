@@ -43,6 +43,11 @@ class Controller
         }
     }
 
+    /**
+     * fetches a page with an array of parameters
+     * @param string $path : the page path without extension (folder1/folder2/file for exemple)
+     * @param array $params : a 1D or 2D array containing parameters
+    */
     protected function render(string $path, array $params = []): void
     {
         $filePath = _ROOTPATH_ . '/templates/' . $path . '.php';

@@ -22,7 +22,7 @@ class MovieRepository extends Repository{
 
     public function findAllMovie():array
     {
-        $query = $this->pdo->prepare("SELECT * FROM movies");
+        $query = $this->pdo->prepare("SELECT * FROM movies ORDER BY movie_id DESC");
         $query->execute();
         $movies = $query->fetchALL($this->pdo::FETCH_ASSOC);
 

@@ -19,8 +19,11 @@ class MovieController extends Controller{
                     case 'list':
                         $this->list();
                         break;
-                        case 'delete':
-                        // Appeler méthode delete()
+                    case 'review':
+                        $this->review();
+                        break;
+                    case 'delete':
+                    // Appeler méthode delete()
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
@@ -36,6 +39,11 @@ class MovieController extends Controller{
         }
     }
 
+    /**
+     * Shows a movie page from a movie_id
+     *
+     * @return void
+     */
     protected function show(){
         try {
             if (isset($_GET['movie_id']) && $_GET['movie_id']!== "") {
@@ -80,6 +88,11 @@ class MovieController extends Controller{
         } 
     }
 
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     protected function list(){
         try {
             $movieRepository = new MovieRepository;
@@ -101,4 +114,34 @@ class MovieController extends Controller{
             ]);
         } 
     }
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    protected function review(){
+        try {
+        //     $movieRepository = new MovieRepository;
+        //     $movies = $movieRepository->findAllMovie();
+
+        //     if(isset($_SESSION["user"])){
+        //         $this->render('movie/list', array_merge([
+        //             'movies' => $movies,
+        //         ],$_SESSION["user"]));
+        //     } else {
+        //         $this->render('movie/list', [
+        //             'movies' => $movies,
+        //             ]);
+        //     }
+                $this->render('review/add',
+                    $_SESSION["user"]);
+    
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        } 
+    }
+
 }
