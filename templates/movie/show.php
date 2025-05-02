@@ -1,7 +1,6 @@
 <?php
 require_once _ROOTPATH_ . '/templates/header.php';
 
-
 ?>
 
 <div class="row flex-lg-row-reverse align-items-start g-5 py-5">

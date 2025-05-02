@@ -3,24 +3,24 @@
 namespace App\Entity;
 
 class Director extends Entity{
-    protected ?int $catgegory_id = null;
+    protected ?int $director_id = null;
     protected ?string $first_name = "";
     protected ?string $last_name = "";
 
     /**
-     * Get the value of catgegory_id
+     * Get the value of director_id
      */
-    public function getCatgegoryId(): ?int
+    public function getdirectorId(): ?int
     {
-        return $this->catgegory_id;
+        return $this->director_id;
     }
 
     /**
-     * Set the value of catgegory_id
+     * Set the value of director_id
      */
-    public function setCatgegoryId(?int $catgegory_id): self
+    public function setdirectorId(?int $director_id): self
     {
-        $this->catgegory_id = $catgegory_id;
+        $this->director_id = $director_id;
         return $this;
     }
 

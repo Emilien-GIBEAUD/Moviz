@@ -3,23 +3,23 @@
 namespace App\Entity;
 
 class Category extends Entity{
-    protected ?int $catgegory_id = null;
+    protected ?int $category_id = null;
     protected ?string $name = "";
 
     /**
-     * Get the value of catgegory_id
+     * Get the value of category_id
      */
-    public function getCatgegoryId(): ?int
+    public function getCategoryId(): ?int
     {
-        return $this->catgegory_id;
+        return $this->category_id;
     }
 
     /**
-     * Set the value of catgegory_id
+     * Set the value of category_id
      */
-    public function setCatgegoryId(?int $catgegory_id): self
+    public function setCategoryId(?int $category_id): self
     {
-        $this->catgegory_id = $catgegory_id;
+        $this->category_id = $category_id;
 
         return $this;
     }

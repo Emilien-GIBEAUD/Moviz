@@ -22,4 +22,32 @@ class DirectorRepository extends Repository{
         }
         return $directorsArray;
     }
+
+    public function findAll():array{
+        $query = $this->pdo->prepare("SELECT * FROM directors ORDER BY last_name");
+        $query->execute();
+        $directors = $query->fetchALL($this->pdo::FETCH_ASSOC);
+
+        $allDirectorsArray = [];
+        if ($directors) {
+            foreach($directors as $director){
+                $allDirectorsArray[] = Director::createAndHydrate($director);
+            }
+        }
+        return $allDirectorsArray;
+    }
+
+    public function persist(string $movie_title, array $directors): void{
+        $movieRepo = new MovieRepository();
+        $movie = $movieRepo->findIdBytitle($movie_title);
+        $movie_id = $movie->getMovieId();
+
+        $query = $this->pdo->prepare('INSERT INTO movie_director (movie_id, director_id) VALUES (:movie_id, :director_id)');
+        foreach($directors as $director) {
+            $query->bindValue(':movie_id', $movie_id, $this->pdo::PARAM_INT);
+            $query->bindValue(':director_id', (int)$director, $this->pdo::PARAM_INT);
+            $query->execute();
+        }
+    }
+
 }

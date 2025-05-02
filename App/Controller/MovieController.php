@@ -6,10 +6,10 @@ use App\Repository\MovieRepository;
 use App\Entity\Movie;
 use App\Repository\CategoryRepository;
 use App\Repository\DirectorRepository;
+use App\Tools\FileTools;
 
 class MovieController extends Controller{
-    public function route(): void
-    {
+    public function route(): void{
         try {
             if (isset($_GET['action'])) {
                 switch ($_GET['action']) {
@@ -22,8 +22,11 @@ class MovieController extends Controller{
                     case 'review':
                         $this->review();
                         break;
+                    case 'add':
+                        $this->add();
+                        break;
                     case 'delete':
-                    // Appeler méthode delete()
+                        // Appeler méthode delete()
                         break;
                     default:
                         throw new \Exception("Cette action n'existe pas : " . $_GET['action']);
@@ -80,7 +83,6 @@ class MovieController extends Controller{
                 throw new \Exception("L'id en paramètre URL est manquant.", 1);
             }
 
-
         } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()
@@ -108,6 +110,51 @@ class MovieController extends Controller{
                     ]);
             }
     
+        } catch (\Exception $e) {
+            $this->render('errors/default', [
+                'error' => $e->getMessage()
+            ]);
+        } 
+    }
+
+    protected function add(): void{
+        try {
+            $errors = [];
+            $movie = new Movie();
+            if ($_SESSION["user"]["role"] === "admin") {
+                $categoryRepository = new CategoryRepository();
+                $categories = $categoryRepository->findAll();
+                $directorRepository = new DirectorRepository();
+                $directors = $directorRepository->findAll();
+
+                if (isset($_POST["saveMovie"])) {
+                    $movie->hydrate($_POST);
+                    FileTools::verifyImage("image_name");
+                    // $errors = $movie->validate();  // A FAIRE A FAIRE A FAIRE A FAIRE A FAIRE
+
+                    if (empty($errors)) {
+                        $image = FileTools::uploadImage(_MOVIES_IMG_DIR_,"image_name");
+                        $movieRepository = new MovieRepository();
+                        $movieRepository->persist($movie,$image["fileName"]);
+
+                        $categories = new CategoryRepository();
+                        $categories->persist($_POST["title"],$_POST["category"]);
+
+                        $directors = new DirectorRepository();
+                        $directors->persist($_POST["title"],$_POST["director"]);
+                        header("Location: /?controller=movie&action=list");
+                    }
+                }
+
+                $this->render('movie/add', array_merge([
+                    'categories' => $categories,
+                    'directors' => $directors,
+                    'errors' => $errors,
+                ],$_SESSION["user"]));
+            } else {
+                throw new \Exception("Cette page requiert les droits administrateur !", 1);
+            }
+
         } catch (\Exception $e) {
             $this->render('errors/default', [
                 'error' => $e->getMessage()

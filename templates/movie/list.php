@@ -12,7 +12,7 @@ require_once _ROOTPATH_ . '/templates/header.php';
                     <h2 class="card-title"><?= $movie->getTitle(); ?></h2>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Date de sorties : </b></li>
+                    <li class="list-group-item"><b>Date de sortie : </b></li>
                     <li class="list-group-item"><b>Durée : </b></li>
                     <li class="list-group-item"><b>Réalisateur : </b></li>
                     <li class="list-group-item"><b>Genre : </b></li>

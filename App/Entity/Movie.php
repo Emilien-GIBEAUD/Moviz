@@ -125,4 +125,5 @@ class Movie extends Entity{
         }
         return _MOVIES_IMG_DIR_.$this->getImageName();
     }
+
 }
