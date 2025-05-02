@@ -51,7 +51,7 @@ class Review extends Entity{
     /**
      * Get the value of date_review
      */
-    public function getDateReview(): ?\DateTime
+    public function getDateReview(): DateTime
     {
         return $this->date_review;
     }
@@ -59,7 +59,7 @@ class Review extends Entity{
     /**
      * Set the value of date_review
      */
-    public function setDateReview(?\DateTime $date_review): self
+    public function setDateReview(DateTime $date_review): self
     {
         $this->date_review = $date_review;
 

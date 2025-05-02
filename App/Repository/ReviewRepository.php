@@ -30,12 +30,6 @@ class ReviewRepository extends Repository{
 
         $date = new DateTime();
         $date_review = $date->format('Y-m-d H:i:s');  // transforme la date en "YYYY-MM-DD"
-        var_dump($review->getReview());
-        var_dump($date_review);
-        var_dump($review->getNote());
-        var_dump($review->getApproved());
-        var_dump($user_id);
-        var_dump($movie_id);
 
         $query->bindValue(':review', $review->getReview(), $this->pdo::PARAM_STR);
         $query->bindValue(':date_review', $date_review, $this->pdo::PARAM_STR);

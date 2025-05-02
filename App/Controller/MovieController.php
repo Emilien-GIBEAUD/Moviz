@@ -54,18 +54,18 @@ class MovieController extends Controller{
             if (isset($_GET['movie_id']) && $_GET['movie_id']!== "") {
                 // Recupération du film avec le repository
                 $movieRepository = new MovieRepository;
-                $id = (int)$_GET['movie_id'];
-                $movie = $movieRepository->findOneById($id);
+                $movie_id = (int)$_GET['movie_id'];
+                $movie = $movieRepository->findOneById($movie_id);
 
                 if ($movie) {
                     $categoryRepository = new CategoryRepository();
-                    $categories = $categoryRepository->findAllByMovieId($movie->getMovieId());
+                    $categories = $categoryRepository->findAllByMovieId($movie_id);
 
                     $directorrepository = new DirectorRepository();
-                    $directors = $directorrepository->findAllByMovieId($movie->getMovieId());
+                    $directors = $directorrepository->findAllByMovieId($movie_id);
 
                     $reviewrepository = new ReviewRepository();
-                    $reviews = $reviewrepository->findAllByMovieId($movie->getMovieId());
+                    $reviews = $reviewrepository->findAllByMovieId($movie_id);
 
                     if(isset($_SESSION["user"])){
                         $this->render('movie/show', array_merge([
@@ -193,14 +193,12 @@ class MovieController extends Controller{
 
                     if(isset($_POST["saveReview"])){
                         $review->hydrate($_POST);
-                        // var_dump($_SESSION["user"]["user_id"]);
-                        // var_dump($movie_id);
                         // $errors = $review->validate();  // A FAIRE A FAIRE A FAIRE A FAIRE A FAIRE
-                        // if (empty($errors)) {
+                        if (empty($errors)) {
                             $reviewRepository = new ReviewRepository();
                             $reviewRepository->persist($review, $_SESSION["user"]["user_id"], $movie_id);
-                            // header("Location: /?controller=movie&action=show&movie_id=$id");
-                        // }
+                            header("Location: /?controller=movie&action=show&movie_id=$movie_id");
+                        }
                     }
                     $this->render('review/add', array_merge([
                         'movie' => $movie,

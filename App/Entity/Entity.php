@@ -27,6 +27,9 @@ class Entity
                     if ($key == 'duration') {
                         $value = $value ? new \DateTime($value) : null;
                     }
+                    if ($key == 'date_review') {
+                        $value = $value ? new \DateTime($value) : null;
+                    }
                     $this->{$methodName}($value);                           // appel dynamique : $this->setFirstName($value);
                 }
             }
