@@ -34,4 +34,19 @@ class MovieRepository extends Repository{
         }
         return $moviesArray;
     }
+
+    public function findIdBytitle(string $title): bool|Movie // ATTENTION présent à l'identique dans la branche add_movie
+    {
+        $query = $this->pdo->prepare("SELECT * FROM movies WHERE title = :title");
+        $query->bindParam(':title', $title, $this->pdo::PARAM_STR);
+        $query->execute();
+        $movie = $query->fetch($this->pdo::FETCH_ASSOC);
+        if ($movie) {
+            return Movie::createAndHydrate($movie);;
+        } else {
+            return false;
+        }
+    }
+
+
 }

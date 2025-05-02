@@ -1,72 +1,27 @@
 <?php
+
+use App\Tools\DateTools;
+
 require_once _ROOTPATH_ . '/templates/header.php';
 
+require_once _ROOTPATH_ . '/templates/movie.php';
 
 ?>
 
-<div class="row flex-lg-row-reverse align-items-start g-5 py-5">
-    <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3"><?= $movie->getTitle(); ?>
-    </h1>
-    <div class="row">
-        <div class="col-6 col-xl-3">
-            <b>Date de sortie : </b>
-            <?php 
-                if ($movie->getReleaseDate()) {
-                    echo $movie->getReleaseDate();
-                } else {
-                    echo "N/C";
-                }
-            ?>
+<h2 id="reviews">Critiques du film</h2>
+<div class="list-group">
+    <?php if(empty($reviews)) { ?>
+        <p class="fw-light fst-italic">Aucune critique n'a encore été postée.</p>
+    <?php } ?>
+    <?php foreach ($reviews as $review) { ?>
+        <div class="list-group-item d-flex gap-2 w-100 justify-content-between">
+            <div>
+                <h6 class="mb-2">Critique de <b><?= $review->getPseudo() ?></b> postée le <b><?= DateTools::dateEnToFr($review->getDateReview()->format('Y-m-d')) ?></b></h6>
+                <p class="mb-0 opacity-75"><?= $review->getReview() ?></p>
+            </div>
+            <small class="text-nowrap">note : <?= $review->getNote() ?></small>
         </div>
-        <div class="col-6 col-xl-3">
-            <b>Durée : </b>
-            <?php 
-                if ($movie->getDuration()) {
-                    echo $movie->getDuration()->format('G\hi');
-                } else {
-                    echo "N/C";
-                }
-            ?>
-        </div>
-        <div class="col-6 col-xl-3">
-            <b>Réalisateur : </b>
-            <?php 
-                $i = 0;
-                foreach($directors as $director){
-                    $i++;
-                    echo $director->getFirstName()." ".$director->getLastName();
-                    if ($i < count($directors)) {
-                        echo ", ";
-                    } else {
-                        echo ".";
-                    }
-            } ?>
-        </div>
-        <div class="col-6 col-xl-3">
-            <b>Genre : </b>
-            <?php 
-                $i = 0;
-                foreach($categories as $category){
-                    $i++;
-                    echo $category->getName();
-                    if ($i < count($categories)) {
-                        echo ", ";
-                    } else {
-                        echo ".";
-                    }
-            } ?>
-        </div>
-    </div>
-    <div class="col-10 col-sm-8 col-lg-6 mx-auto">
-        <img src="<?= $movie->getImagePath(); ?>" class="d-block mx-lg-auto img-fluid" alt="<?= $movie->getTitle(); ?>" width="700" height="500" loading="lazy">
-    </div>
-    <div class="col-lg-6">
-        <p class="lead"> <?= $movie->getSynopsis() ?></p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-            <a href="<?= "/?controller=movie&action=review&movie_id=" . $movie->getMovieId(); ?>" type="button" class="btn btn-primary btn-lg px-2 py-1 me-md-2">Poster une critique</a>
-            <a href="/" type="button" class="btn btn-outline-secondary btn-lg px-2 py-1">!!Lire les critiques!!</a>
-        </div>
-    </div>
+    <?php } ?>
 </div>
 
 <?php require_once _ROOTPATH_ . '/templates/footer.php'; ?>

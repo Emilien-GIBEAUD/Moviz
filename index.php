@@ -3,7 +3,7 @@ require_once __DIR__.'/config.php';
 
 // Sécurise le cookie de session avec httponly
 session_set_cookie_params([
-    'lifetime' => 3600,
+    'lifetime' => 43200,
     'path' => '/',
     'domain' => $_SERVER['SERVER_NAME'],
     'httponly' => true

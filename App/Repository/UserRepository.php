@@ -9,10 +9,10 @@ use App\Tools\StringTools;
 class UserRepository extends Repository
 {
 
-    public function findOneById(int $id)
+    public function findOneById(int $user_id)
     {
-        $query = $this->pdo->prepare("SELECT * FROM users WHERE id = :id");
-        $query->bindParam(':id', $id, $this->pdo::PARAM_STR);
+        $query = $this->pdo->prepare("SELECT * FROM users WHERE user_id = :user_id");
+        $query->bindParam(':user_id', $user_id, $this->pdo::PARAM_STR);
         $query->execute();
         $user = $query->fetch($this->pdo::FETCH_ASSOC);
         if ($user) {
@@ -37,10 +37,10 @@ class UserRepository extends Repository
     public function persist(User $user)
     {
         
-        if ($user->getId() !== null) {
-                $query = $this->pdo->prepare('UPDATE users SET first_name = :first_name, last_name = :last_name, pseudo = :pseudo, email = :email, password = :password WHERE id = :id'
+        if ($user->getUserId() !== null) {
+                $query = $this->pdo->prepare('UPDATE users SET first_name = :first_name, last_name = :last_name, pseudo = :pseudo, email = :email, password = :password WHERE user_id = :user_id'
                 );
-                $query->bindValue(':id', $user->getId(), $this->pdo::PARAM_INT);
+                $query->bindValue(':user_id', $user->getUserId(), $this->pdo::PARAM_INT);
 
         } else {
             $query = $this->pdo->prepare('INSERT INTO users (first_name, last_name, pseudo, email, password, role) VALUES (:first_name, :last_name, :pseudo, :email, :password, :role)'
