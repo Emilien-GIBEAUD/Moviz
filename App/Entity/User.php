@@ -7,7 +7,7 @@ use App\Tools\BddTools;
 
 class User extends Entity
 {
-    protected ?int $id = null;
+    protected ?int $user_id = null;
     protected ?string $email = '';
     protected ?string $password = '';
     protected ?string $first_name = '';
@@ -15,14 +15,14 @@ class User extends Entity
     protected ?string $pseudo = '';
     protected ?string $role = '';
 
-    public function getId(): ?int
+    public function getUserId(): ?int
     {
-        return $this->id;
+        return $this->user_id;
     }
 
-    public function setId(?int $id): self
+    public function setUserId(?int $user_id): self
     {
-        $this->id = $id;
+        $this->user_id = $user_id;
 
         return $this;
     }

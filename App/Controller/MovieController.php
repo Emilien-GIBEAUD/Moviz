@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
-use App\Repository\MovieRepository;
 use App\Entity\Movie;
+use App\Entity\Review;
+use App\Repository\MovieRepository;
+use App\Repository\ReviewRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\DirectorRepository;
 use App\Tools\FileTools;
@@ -62,17 +64,22 @@ class MovieController extends Controller{
                     $directorrepository = new DirectorRepository();
                     $directors = $directorrepository->findAllByMovieId($movie->getMovieId());
 
+                    $reviewrepository = new ReviewRepository();
+                    $reviews = $reviewrepository->findAllByMovieId($movie->getMovieId());
+
                     if(isset($_SESSION["user"])){
                         $this->render('movie/show', array_merge([
                             'movie' => $movie,
                             'categories' => $categories,
                             'directors' => $directors,
+                            'reviews' => $reviews,
                         ],$_SESSION["user"]));
                     } else {
                         $this->render('movie/show', [
                             'movie' => $movie,
                             'categories' => $categories,
                             'directors' => $directors,
+                            'reviews' => $reviews,
                         ]);
                     }
         
@@ -169,25 +176,51 @@ class MovieController extends Controller{
      */
     protected function review(){
         try {
-        //     $movieRepository = new MovieRepository;
-        //     $movies = $movieRepository->findAllMovie();
+            $errors = [];
+            $review = new Review();
+            if (isset($_GET['movie_id']) && $_GET['movie_id']!== "" && isset($_SESSION["user"])) {
+                // Recupération du film avec le repository
+                $movieRepository = new MovieRepository;
+                $movie_id = (int)$_GET['movie_id'];
+                $movie = $movieRepository->findOneById($movie_id);
 
-        //     if(isset($_SESSION["user"])){
-        //         $this->render('movie/list', array_merge([
-        //             'movies' => $movies,
-        //         ],$_SESSION["user"]));
-        //     } else {
-        //         $this->render('movie/list', [
-        //             'movies' => $movies,
-        //             ]);
-        //     }
-                $this->render('review/add',
-                    $_SESSION["user"]);
+                if ($movie) {
+                    $categoryRepository = new CategoryRepository();
+                    $categories = $categoryRepository->findAllByMovieId($movie_id);
+
+                    $directorrepository = new DirectorRepository();
+                    $directors = $directorrepository->findAllByMovieId($movie_id);
+
+                    if(isset($_POST["saveReview"])){
+                        $review->hydrate($_POST);
+                        // var_dump($_SESSION["user"]["user_id"]);
+                        // var_dump($movie_id);
+                        // $errors = $review->validate();  // A FAIRE A FAIRE A FAIRE A FAIRE A FAIRE
+                        // if (empty($errors)) {
+                            $reviewRepository = new ReviewRepository();
+                            $reviewRepository->persist($review, $_SESSION["user"]["user_id"], $movie_id);
+                            // header("Location: /?controller=movie&action=show&movie_id=$id");
+                        // }
+                    }
+                    $this->render('review/add', array_merge([
+                        'movie' => $movie,
+                        'categories' => $categories,
+                        'directors' => $directors,
+                    ],$_SESSION["user"]));
+        
+                } else {
+                    throw new \Exception("L'id en paramètre URL est inconnu.", 1);
+                }
+            } else if (!isset($_SESSION["user"])) {
+                header ('location: index.php?controller=auth&action=login');
+            } else {
+                throw new \Exception("L'id en paramètre URL est manquant.", 1);
+            }
     
         } catch (\Exception $e) {
-            $this->render('errors/default', [
+            $this->render('errors/default', array_merge([
                 'error' => $e->getMessage()
-            ]);
+            ],$_SESSION["user"]));
         } 
     }
 

@@ -1,7 +1,5 @@
 <?php 
 require_once _ROOTPATH_ . '/templates/header.php'; 
-use App\Entity\User;
-
 ?>
 
 <h1>Bienvenue sur la page d'accueil de Moviz</h1>
