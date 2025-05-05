@@ -27,6 +27,10 @@ class Controller
                         $controller = new MovieController();
                         $controller->route();
                         break;
+                    case 'review':
+                        $controller = new ReviewController();
+                        $controller->route();
+                        break;
                     default:
                         throw new \Exception("Le controleur n'existe pas");
                         break;

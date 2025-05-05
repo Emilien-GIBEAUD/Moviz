@@ -98,7 +98,7 @@ class MovieController extends Controller{
     }
 
     /**
-     * Undocumented function
+     * Lists all the movies
      *
      * @return void
      */
@@ -124,6 +124,11 @@ class MovieController extends Controller{
         } 
     }
 
+    /**
+     * Adds a movie (for admin only)
+     *
+     * @return void
+     */
     protected function add(): void{
         try {
             $errors = [];
@@ -170,7 +175,7 @@ class MovieController extends Controller{
     }
 
     /**
-     * Undocumented function
+     * Saves a review
      *
      * @return void
      */

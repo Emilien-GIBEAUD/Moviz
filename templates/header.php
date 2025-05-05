@@ -46,7 +46,7 @@ use App\Tools\NavigationTools;
                         <a href="/?controller=movie&action=add" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('movie', 'add') ?>">Ajouter<br>film</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('xxx', 'xxx') ?>">Valider<br>critique</a>
+                        <a href="/?controller=review&action=reviewsToValidate" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('review', 'reviewsToValidate') ?>">Valider<br>critique</a>
                     </li>
                 </ul>
             <?php } ?>
