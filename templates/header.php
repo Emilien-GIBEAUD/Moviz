@@ -1,7 +1,15 @@
 <?php
 
+use App\Db\Mysql;
 use App\Entity\User;
+use App\Repository\ReviewRepository;
 use App\Tools\NavigationTools;
+
+if (User::isAdmin()) {
+    $mysql = Mysql::getInstance();
+    $reviews_to_validate = ReviewRepository::reviewsToValidate($mysql);
+    $nb_rtv = count($reviews_to_validate);
+}
 
 ?>
 
@@ -45,9 +53,11 @@ use App\Tools\NavigationTools;
                     <li class="nav-item">
                         <a href="/?controller=movie&action=add" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('movie', 'add') ?>">Ajouter<br>film</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="/?controller=review&action=reviewsToValidate" class="nav-link px-2 text-center <?= NavigationTools::addActiveClass('review', 'reviewsToValidate') ?>">Valider<br>critique</a>
-                    </li>
+                    <?php if ($nb_rtv) { ?>
+                        <li class="nav-item">
+                            <a href="/?controller=review&action=reviewsToValidate" class="nav-link link-danger px-2 text-center <?= NavigationTools::addActiveClass('review', 'reviewsToValidate') ?>">Valider<?= $nb_rtv>1?" $nb_rtv<br>critiques":" $nb_rtv<br>critique"?></a>
+                        </li>
+                    <?php } ?>
                 </ul>
             <?php } ?>
 
