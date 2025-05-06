@@ -34,7 +34,8 @@
                     } else {
                         echo ".";
                     }
-            } ?>
+                } 
+            ?>
         </div>
         <div class="col-6 col-xl-3">
             <b>Genre : </b>
@@ -48,7 +49,8 @@
                     } else {
                         echo ".";
                     }
-            } ?>
+                } 
+            ?>
         </div>
     </div>
 

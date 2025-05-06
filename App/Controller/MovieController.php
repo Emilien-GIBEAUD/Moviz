@@ -62,8 +62,8 @@ class MovieController extends Controller{
                     $categoryRepository = new CategoryRepository();
                     $categories = $categoryRepository->findAllByMovieId($movie_id);
 
-                    $directorrepository = new DirectorRepository();
-                    $directors = $directorrepository->findAllByMovieId($movie_id);
+                    $directorRepository = new DirectorRepository();
+                    $directors = $directorRepository->findAllByMovieId($movie_id);
 
                     $reviewrepository = new ReviewRepository();
                     $reviews = $reviewrepository->findAllByMovieId($movie_id);

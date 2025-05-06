@@ -5,6 +5,13 @@ namespace App\Repository;
 use App\Entity\Director;
 
 class DirectorRepository extends Repository{
+
+    /**
+     * Return an array with all the directors (from the table directors) of a movie
+     *
+     * @param integer $movie_id : The id of the movie in the table movies
+     * @return array : An array with all the directors of the movie
+     */
     public function findAllByMovieId(int $movie_id):array
     {
         $query = $this->pdo->prepare("SELECT * FROM directors AS d
@@ -23,6 +30,11 @@ class DirectorRepository extends Repository{
         return $directorsArray;
     }
 
+    /**
+     * Return an array with all the directors (from the table directors)
+     *
+     * @return array : An array with all the directors
+     */
     public function findAll():array{
         $query = $this->pdo->prepare("SELECT * FROM directors ORDER BY last_name");
         $query->execute();
@@ -37,6 +49,13 @@ class DirectorRepository extends Repository{
         return $allDirectorsArray;
     }
 
+    /**
+     * Save in the table movie_director all the directors (director_id) of a movie
+     *
+     * @param string $movie_title : The title of the movie in the table movies
+     * @param array $directors : An array with the directors of the movie
+     * @return void
+     */
     public function persist(string $movie_title, array $directors): void{
         $movieRepo = new MovieRepository();
         $movie = $movieRepo->findIdBytitle($movie_title);
