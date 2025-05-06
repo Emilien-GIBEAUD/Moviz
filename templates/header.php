@@ -55,7 +55,7 @@ if (User::isAdmin()) {
                     </li>
                     <?php if ($nb_rtv) { ?>
                         <li class="nav-item">
-                            <a href="/?controller=review&action=reviewsToValidate" class="nav-link link-danger px-2 text-center <?= NavigationTools::addActiveClass('review', 'reviewsToValidate') ?>">Valider<?= $nb_rtv>1?" $nb_rtv<br>critiques":" $nb_rtv<br>critique"?></a>
+                            <a href="/?controller=review&action=reviewsToValidate" class="nav-link link-danger px-2 text-center <?= NavigationTools::addActiveClass('review', 'reviewsToValidate') ?>"><?= $nb_rtv>1?"$nb_rtv critiques":"$nb_rtv critique"?><br>à valider</a>
                         </li>
                     <?php } ?>
                 </ul>

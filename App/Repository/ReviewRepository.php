@@ -59,7 +59,7 @@ class ReviewRepository extends Repository{
 
     /**
      * Returns an array with all the reviews to validate. 
-     * Reviews to validate are reviews with reviews.approved = NULL
+     * Reviews to validate are the reviews with reviews.approved = NULL
     *
     * @param Mysql $mysql : The DB connection object used to query the DB
     * @return array : Array with all the reviews to validate.
@@ -83,6 +83,22 @@ class ReviewRepository extends Repository{
             }
         }
         return $reviewsToValidate;
+    }
+
+    public function reviewValidations(array $reviews_to_validate):void {
+        foreach($reviews_to_validate as $review){
+            $query = $this->pdo->prepare('UPDATE reviews SET approved = :approved WHERE review_id = :review_id');
+
+            $review_id = $review->getReviewId();
+            $query->bindValue(':review_id', $review_id, $this->pdo::PARAM_INT);
+
+            if ($_POST["$review_id"] === "validate") {
+                $query->bindValue(":approved", true, $this->pdo::PARAM_BOOL);
+            } else {
+                $query->bindValue(":approved", false, $this->pdo::PARAM_BOOL);
+            }
+            $query->execute();
+        }
     }
 
 }

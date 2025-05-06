@@ -2,9 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Movie;
-use App\Entity\Review;
-use App\Repository\MovieRepository;
+use App\Db\Mysql;
+use App\Entity\User;
 use App\Repository\ReviewRepository;
 
 class ReviewController extends Controller{
@@ -36,6 +35,13 @@ class ReviewController extends Controller{
      */
     protected function reviewsToValidate(){
         try {
+            if (User::isAdmin() && isset($_POST["saveReviewValidation"])) {
+                $reviewRepository = new ReviewRepository();
+                $mysql = Mysql::getInstance();
+                $reviews_to_validate = ReviewRepository::reviewsToValidate($mysql);
+                $reviewRepository->reviewValidations($reviews_to_validate);
+                header("Location: /?controller=movie&action=list");
+            }
             $this->render('review/reviews_to_validate', $_SESSION["user"]);
         } catch (\Exception $e) {
             $this->render('errors/default', [

@@ -1,34 +1,32 @@
 <?php
 require_once _ROOTPATH_ . '/templates/header.php';
+use App\Tools\DateTools;
 
 ?>
 <h2>Valider les critiques</h2>
-<!-- <div class="container col-10 col-md-8 col-lg-6 m-auto">
+<div class="list-group">
     <form action="" method="post">
-        <div class="mb-3">
-            <label class="form-label" for="review">Critique :</label>
-            <textarea class="form-control" name="review" id="review" rows="5"></textarea>
-
-            <?php if (isset($errors["review"])) { ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= $errors["review"]?>
+        <?php foreach ($reviews_to_validate as $review) { ?>
+            <div class="list-group-item d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    <h6 class="mb-2"><b><?= $review->getTitle() ?> : </b>Critique de <b><?= $review->getPseudo() ?> (<?= $review->getEmail() ?>)</b> postée le <b><?= DateTools::dateTimeEnToFr($review->getDateReview()->format('Y-m-d H:i:s')) ?></b></h6>
+                    <p class="fw-light fst-italic"><?= $review->getReview() ?></p>
                 </div>
-            <?php } ?>
-
+                <small class="text-nowrap text-center ms-4">
+                    <label for="<?= $review->getReviewId(); ?>">Valider/<br>Rejeter : </label><br><br>
+                    <select name="<?= $review->getReviewId(); ?>" id="<?= $review->getReviewId(); ?>">
+                        <option value="reject">Rejeter</option>
+                        <option value="validate">Valider</option>
+                    </select><br><br>
+                </small>
+            </div>
+        <?php } ?>
+        <div class="text-center">
+        <input type="submit" name="saveReviewValidation" class="btn btn-primary mt-2" value="Valider/Rejeter les critiques">
         </div>
-
-        <div class="mb-3">
-            <label class="form-label" for="note">note :</label>
-            <input class="form-control" type="number" min="0" max="5" step="0.5" name="note" id="note">
-        <p class="fw-light fst-italic">Note comprise entre 0 et 5 (avec un incrément de 0.5).</p>
-        </div>
-
-        <input type="submit" name="saveReview" class="btn btn-primary" value="Enregistrer">
-        <p class="fw-light fst-italic">Votre critique sera relue puis publiée par un administrateur prochainement (si elle est validée).</p>
     </form>
-</div> -->
-
-
+</div>
 
 <?php require_once _ROOTPATH_ . '/templates/footer.php'; ?>
+
 

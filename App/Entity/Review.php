@@ -12,7 +12,11 @@ class Review extends Entity{
     protected ?bool $approved = null;
     protected ?int $user_id = null;
     protected ?int $movie_id = null;
+
+    // adding of the user and movie attributes without relation with class User and Movie to limit the bdd calls and improve the preformances
     protected ?string $pseudo = "";
+    protected ?string $email = "";
+    protected ?string $title = "";
 
     /**
      * Get the value of review_id
@@ -149,6 +153,40 @@ class Review extends Entity{
     {
         $this->pseudo = $pseudo;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of email
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set the value of email
+     */
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the value of title
+     */
+    public function setTitle(?string $title): self
+    {
+        $this->title = $title;
         return $this;
     }
 }

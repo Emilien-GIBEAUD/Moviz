@@ -8,6 +8,7 @@ use App\Repository\MovieRepository;
 use App\Repository\ReviewRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\DirectorRepository;
+use App\Repository\UserRepository;
 use App\Tools\FileTools;
 
 class MovieController extends Controller{
