@@ -1,7 +1,7 @@
-CREATE DATABASE moviz CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;;
+CREATE DATABASE moviz CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE moviz;
 
-CREATE TABLE Movies (
+CREATE TABLE movies (
     movie_id INT AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
     synopsis TEXT NOT NULL,
@@ -10,10 +10,7 @@ CREATE TABLE Movies (
     image_name VARCHAR(255),
     PRIMARY KEY (movie_id)
 );
-DROP TABLE Movies;
-INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
-(NULL, "", "", "", "");
-INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
+INSERT INTO movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
 (NULL, "Inception", "Un voleur expérimenté dans l'art d'extraire des secrets du subconscient pendant l'état de rêve se voit offrir une chance de retrouver sa vie normale en accomplissant une tâche impossible : l'implantation d'une idée dans l'esprit d'une personne. Au lieu de voler une idée, il doit en placer une.", "2010", "02:28:00", "inception.jpg"),
 (NULL, "The Dark Knight, Le Chevalier Noir", "Batman, avec l'aide du Lieutenant Jim Gordon et du procureur Harvey Dent, entreprend de démanteler les organisations criminelles qui sévissent dans Gotham. Leur association s'avère efficace, mais ils se retrouvent bientôt face à un nouveau génie du crime, le Joker, qui plonge Gotham dans l'anarchie.", "2008", "02:32:00", "dark_knight.jpg"),
 (NULL, "Interstellar", "Dans un futur proche où la Terre devient inhabitable, un groupe d'explorateurs entreprend la mission la plus importante de l'histoire de l'humanité : franchir les limites de notre galaxie pour déterminer si l'humanité a un avenir parmi les étoiles.", "2014", "02:49:00", "interstellar.jpg"),
@@ -29,19 +26,16 @@ INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_nam
 (NULL, "Inglourious Basterds", "Dans la France occupée pendant la Seconde Guerre mondiale, un groupe de soldats juifs américains, connus sous le nom des \"Basterds\", est chargé de répandre la terreur parmi les troupes allemandes en scalpant les soldats nazis. Leur chemin croise celui d'une jeune femme juive qui cherche à venger sa famille assassinée par un colonel SS.", "2009", "02:33:00", "Inglourious_Basterds.jpg"),
 (NULL, "Django Unchained", "Dans le sud des États-Unis, deux ans avant la guerre de Sécession, un ancien esclave s'associe à un chasseur de primes allemand qui l'a libéré. Ensemble, ils partent à la recherche de la femme de Django, toujours en esclavage, et affrontent le cruel propriétaire d'une plantation.", "2012", "02:45:00", "Django_Unchained.jpg"),
 (NULL, "Kill Bill: Volume 1", "Une ancienne tueuse à gages, connue sous le nom de \"La Mariée\", se réveille après quatre ans de coma et entreprend une vengeance sanglante contre son ancien patron, Bill, et son escadron d'assassins qui l'ont trahie lors de son mariage.", "2003", "01:51:00", "Kill_Bill_1.webp"),
-(NULL, "Kill Bill: Volume 2", "Suite de sa vengeance, \"La Mariée\" continue d'éliminer les membres restants de l'escadron d'assassins avant de confronter Bill, son ancien mentor et amant qui a tenté de la tuer le jour de son mariage.", "2004", "02:17:00", "Kill_Bill_2.jpg");
-INSERT INTO Movies (movie_id, title, synopsis, release_date, duration, image_name) VALUES 
+(NULL, "Kill Bill: Volume 2", "Suite de sa vengeance, \"La Mariée\" continue d'éliminer les membres restants de l'escadron d'assassins avant de confronter Bill, son ancien mentor et amant qui a tenté de la tuer le jour de son mariage.", "2004", "02:17:00", "Kill_Bill_2.jpg"),
 (NULL, "Rosetta", "Une jeune femme déterminée lutte pour trouver un emploi stable et s'extraire de la précarité, malgré les nombreux obstacles qui se dressent sur son chemin. Vivant dans une caravane avec sa mère alcoolique, Rosetta cherche désespérément à s'intégrer dans la société et à mener ce qu'elle considère comme une vie normale.", "1999", "01:35:00", "Rosetta.webp");
 
 
-CREATE TABLE Categories (
+CREATE TABLE categories (
     category_id INT AUTO_INCREMENT,
     name VARCHAR(255),
     PRIMARY KEY (category_id)
 );
-INSERT INTO Categories (category_id, name) VALUES 
-(NULL, "");
-INSERT INTO Categories (category_id, name) VALUES 
+INSERT INTO categories (category_id, name) VALUES 
 (NULL, "Science-fiction"),
 (NULL, "Action"),
 (NULL, "Thriller"),
@@ -53,27 +47,26 @@ INSERT INTO Categories (category_id, name) VALUES
 (NULL, "Famille"),
 (NULL, "Biographie"),
 (NULL, "Guerre"),
-(NULL, "Western");
-INSERT INTO Categories (category_id, name) VALUES 
-(NULL, "Social");
+(NULL, "Western"),
+(NULL, "Social"),
+(NULL, "Comédie");
 
-CREATE TABLE Directors (
+CREATE TABLE directors (
     director_id INT AUTO_INCREMENT,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (director_id)
 );
-INSERT INTO Directors (director_id, first_name, last_name) VALUES 
+INSERT INTO directors (director_id, first_name, last_name) VALUES 
 (NULL, 'Christopher', 'Nolan'),
 (NULL, 'Claude', 'Lelouche'),
 (NULL, 'Steven', 'Spielberg'),
 (NULL, 'Martin', 'Scorsese'),
-(NULL, 'Quentin', 'Tarantino');
-INSERT INTO Directors (director_id, first_name, last_name) VALUES 
+(NULL, 'Quentin', 'Tarantino'),
 (NULL, "Jean-Pierre", "Dardenne"),
 (NULL, "Luc", "Dardenne");
 
-CREATE TABLE Users (
+CREATE TABLE users (
     user_id INT AUTO_INCREMENT,
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255) NOT NULL,
@@ -85,9 +78,8 @@ CREATE TABLE Users (
     UNIQUE (pseudo),
     UNIQUE (email)
 );
-DROP TABLE users;
 
-CREATE TABLE Reviews (
+CREATE TABLE reviews (
     review_id INT AUTO_INCREMENT,
     review TEXT NOT NULL,
     date_review DATETIME NOT NULL,
@@ -96,28 +88,22 @@ CREATE TABLE Reviews (
     user_id INT NOT NULL,
     movie_id INT NOT NULL,
     PRIMARY KEY (review_id),
-    FOREIGN KEY (user_id) REFERENCES Users (user_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies (movie_id)
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    FOREIGN KEY (movie_id) REFERENCES movies (movie_id)
 );
-DROP TABLE reviews;
-INSERT INTO reviews(review_id, review, date_review, note, approved, user_id, movie_id) VALUES
-    (NULL, "Très bon film.", NOW(), "4.5", NULL, 1, 1);
-
 CREATE TABLE movie_director (
     movie_id INT,
     director_id INT,
     PRIMARY KEY (movie_id, director_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies (movie_id),
-    FOREIGN KEY (director_id) REFERENCES Directors (director_id)
+    FOREIGN KEY (movie_id) REFERENCES movies (movie_id),
+    FOREIGN KEY (director_id) REFERENCES directors (director_id)
 );
-DROP TABLE movie_director;
 INSERT INTO movie_director (movie_id, director_id) VALUES 
 (1,1),(2,1),(3,1),
 (4,2),(5,2),(6,2),
 (7,3),(8,3),(9,3),
 (10,4),(11,4),(12,4),
-(13,5),(14,5),(15,5),(16,5);
-INSERT INTO movie_director (movie_id, director_id) VALUES 
+(13,5),(14,5),(15,5),(16,5),
 (17,6),
 (17,7);
 
@@ -125,12 +111,9 @@ CREATE TABLE movie_category (
     movie_id INT,
     category_id INT,
     PRIMARY KEY (movie_id, category_id),
-    FOREIGN KEY (movie_id) REFERENCES Movies (movie_id),
-    FOREIGN KEY (category_id) REFERENCES Categories (category_id)
+    FOREIGN KEY (movie_id) REFERENCES movies (movie_id),
+    FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );
-DROP TABLE movie_category;
-INSERT INTO movie_category (movie_id, category_id) VALUES 
-(,);
 INSERT INTO movie_category (movie_id, category_id) VALUES 
 (1, 1), (1, 2), (1, 3), (1, 4),
 (2, 2), (2, 5), (2, 4), (2, 3),
@@ -147,14 +130,7 @@ INSERT INTO movie_category (movie_id, category_id) VALUES
 (13, 11), (13, 2), (13, 4),
 (14, 12), (14, 4), (14, 2),
 (15, 2), (15, 5), (15, 3),
-(16, 2), (16, 5), (16, 3), (16, 4);
-INSERT INTO movie_category (movie_id, category_id) VALUES 
+(16, 2), (16, 5), (16, 3), (16, 4),
 (17,4),
 (17,13);
 
-DELETE FROM movie_category
-WHERE movie_id > 18;
-DELETE FROM movie_director
-WHERE movie_id > 18;
-DELETE FROM movies
-WHERE movie_id > 18;

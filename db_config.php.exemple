@@ -1,9 +1,9 @@
 <?php
-// Put your configuration and rename in "db_config.php"
+// Put your configuration and rename this file in "db_config.php"
     return [
         'db_name' => 'mini_website',
-        'db_user' => 'root',
-        'db_password' => '',
+        'db_user' => 'your_user',
+        'db_password' => 'your_password',
         'db_port' => '3306',
         'db_host' => 'localhost'
     ];
