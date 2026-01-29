@@ -1,3 +1,5 @@
+# Dokerfile de dev
+
 FROM dunglas/frankenphp:1.10.1-php8.3.28
 
 # add additional extensions here:

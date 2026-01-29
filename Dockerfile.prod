@@ -1,0 +1,20 @@
+# Dokerfile de prod
+
+FROM dunglas/frankenphp:1.10.1-php8.3.28
+
+RUN install-php-extensions \
+    pdo_mysql \
+    gd \
+    intl \
+    opcache
+
+# Dossier de travail
+WORKDIR /app
+COPY . /app
+
+# On remplace le Caddyfile par défaut
+COPY Caddyfile /etc/frankenphp/Caddyfile
+
+ENV SERVER_NAME=:80
+
+EXPOSE 80

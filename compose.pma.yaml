@@ -1,0 +1,23 @@
+# 1. Copier ce fichier dans le dossier de prod de PHPMyadmin (en le renommant en compose.yaml)
+services:
+  moviz_phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: moviz_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: moviz_db
+      PMA_PORT: 3306
+    networks:
+      - edge
+      - moviz_internal
+
+networks:
+  # Réseau Traefik existant
+  edge:
+    external: true
+    name: edge_edge
+
+  # Réseau interne DB de Moviz
+  moviz_internal:
+    external: true
+    name: moviz_php_moviz_internal

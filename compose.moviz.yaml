@@ -1,0 +1,44 @@
+# 1. Copier ce fichier dans le dossier de prod de l'application Moviz (en le renommant en compose.yaml)
+# 2. Saisir l'image de Moviz souhaitée (en ligne 5) et votre user DockerHub si besoin
+services:
+  moviz_app:
+    image: emiliengibeaud/moviz:latest
+    container_name: moviz_app
+    restart: unless-stopped
+    environment:
+      SERVER_NAME: ":80"   # pour éviter le redirect https de FrankenPHP
+    volumes:
+      - picture_data:/app/uploads
+      - ./db_config.php:/app/db_config.php:ro
+    networks:
+      - edge_edge
+      - moviz_internal
+    depends_on:
+      - moviz_db
+
+  moviz_db:
+    image: mariadb:${MARIADB_VERSION}
+    container_name: moviz_db
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      # You should definitely change the password in production
+      MARIADB_RANDOM_ROOT_PASSWORD: "true"
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "3306"
+    volumes:
+      - moviz_db_data:/var/lib/mysql
+    networks:
+      - moviz_internal
+
+networks:
+  edge_edge:
+    external: true
+  moviz_internal:
+    driver: bridge
+
+volumes:
+  picture_data:
+  moviz_db_data:

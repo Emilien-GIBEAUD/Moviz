@@ -1,0 +1,11 @@
+.git
+.gitignore
+Dockerfile
+Dockerfile.prod
+compose.yaml
+compose.*.yaml
+.env
+.env.*
+db_config.*
+README*
+.cache

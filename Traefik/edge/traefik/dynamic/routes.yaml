@@ -1,0 +1,47 @@
+# Créer les domaines et sous-domaines nécessaires 
+# exemple : moviz.domain.com et movizpma.domain.com
+
+http:
+  routers:
+    moviz-router:
+      rule: "Host(`moviz.domain.com`)"
+      # saisir votre domaine sous-domaines au-dessus
+      entryPoints: ["web", "websecure"]
+      tls:
+        certResolver: myresolver
+      service: moviz-svc
+
+    moviz-pma-router:
+      rule: "Host(`movizpma.domain.com`)"
+      # saisir votre domaine sous-domaines au-dessus
+      entryPoints: ["websecure"]
+      tls:
+        certResolver: myresolver
+      service: moviz-pma-svc
+
+  services:
+    moviz-svc:
+      loadBalancer:
+        servers:
+          - url: "http://moviz_app:80"
+
+    moviz-pma-svc:
+      loadBalancer:
+        servers:
+          - url: "http://moviz_phpmyadmin:80"
+
+  middlewares:
+    cors:
+      headers:
+        accessControlAllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        accessControlAllowOriginList:
+          - "*"
+        accessControlAllowHeaders:
+          - "*"
+        accessControlMaxAge: 86400
+        addVaryHeader: true
