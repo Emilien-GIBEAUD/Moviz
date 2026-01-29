@@ -50,7 +50,7 @@ Construire une image :
 
 Tag d'une image latest (_optionnel_) :
 
-    docker tag emiliengibeaud/moviz:0.1.0 emiliengibeaud/moviz:latest
+    docker tag votre_user_docker/moviz:0.1.0 votre_user_docker/moviz:latest
 
 Envoie sur le Docker Hub :
 
