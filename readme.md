@@ -99,7 +99,7 @@ L'application sera accessible via votre sous domaine d'application.
 ### Mise en place de PHPMyAdmin (_pour administration ponctuelle_)
 
 * Créer un dossier Moviz/Moviz_pma par exemple sur le VPS
-* Y créer le fichier "compose.yaml" (à l'aide de fichier "compose.pma.yaml", ".env.exemple" et "db_config.php.exemple")
+* Y créer le fichier "compose.yaml" (à l'aide du fichier "compose.pma.yaml")
 * _La stack contient un conteneur "moviz_app" et un conteneur "moviz_db"_
 
 Lancer le conteneur avec :
